@@ -13,7 +13,9 @@ class AccountsWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor( element ) {
-
+    this.element = element;
+    this.registerEvents();
+    this.update();
   }
 
   /**
@@ -24,7 +26,6 @@ class AccountsWidget {
    * вызывает AccountsWidget.onSelectAccount()
    * */
   registerEvents() {
-
   }
 
   /**
@@ -37,8 +38,13 @@ class AccountsWidget {
    * Отображает список полученных счетов с помощью
    * метода renderItem()
    * */
-  update() {
-
+  async update() {
+    const isCurrentUser = User.current();
+    if (!isCurrentUser) {
+      return;
+    }
+    this.clear();
+    return await Account.list(isCurrentUser, this.renderItem.bind(this))
   }
 
   /**
@@ -47,7 +53,9 @@ class AccountsWidget {
    * в боковой колонке
    * */
   clear() {
-
+    const ulContainer = document.querySelector('.accounts-panel');
+    const accountElements = [...ulContainer.querySelectorAll('.account')];
+    accountElements.forEach((element) => element.remove());
   }
 
   /**
@@ -67,7 +75,12 @@ class AccountsWidget {
    * item - объект с данными о счёте
    * */
   getAccountHTML( item ) {
-
+    return `<li class="account">
+      <a href="#">
+        <span>${item.name}</span> /
+        <span>${item.sum} ₽</span>
+      </a>
+    </li>`
   }
 
   /**
@@ -77,6 +90,9 @@ class AccountsWidget {
    * и добавляет его внутрь элемента виджета
    * */
   renderItem( item ) {
-
+    const accounts = item.data;
+    const ulContainer = document.querySelector('.accounts-panel > li');
+    let template = accounts.map((account) => this.getAccountHTML(account)).join(' ');
+    ulContainer.insertAdjacentHTML('afterend', template);
   }
 }
