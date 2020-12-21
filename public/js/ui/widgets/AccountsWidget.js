@@ -13,9 +13,13 @@ class AccountsWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor( element ) {
+    if (!element) {
+      throw new Error('Элемент должен быть передан!');
+    }
     this.element = element;
     this.registerEvents();
     this.update();
+
   }
 
   /**
@@ -26,6 +30,18 @@ class AccountsWidget {
    * вызывает AccountsWidget.onSelectAccount()
    * */
   registerEvents() {
+    const newAccountButtonElement = document.querySelector('.create-account');
+    const accounts = document.querySelector('.accounts-panel');
+    newAccountButtonElement.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const createNewAccountModalWindow = App.getModal('newAccount');
+        createNewAccountModalWindow.open();
+    });
+    accounts.addEventListener('click', (e) => {
+      const currentElement = e.target;
+      this.onSelectAccount(currentElement);
+    });
+
   }
 
   /**
@@ -43,8 +59,7 @@ class AccountsWidget {
     if (!isCurrentUser) {
       return;
     }
-    this.clear();
-    return await Account.list(isCurrentUser, this.renderItem.bind(this))
+    await Account.list(isCurrentUser, this.renderItem.bind(this));
   }
 
   /**
@@ -66,7 +81,14 @@ class AccountsWidget {
    * Вызывает App.showPage( 'transactions', { account_id: id_счёта });
    * */
   onSelectAccount( element ) {
-
+    const currentAccount = element.closest('.account');
+    const accounts = [...element
+        .closest('.accounts-panel')
+        .querySelectorAll('.account')];
+    accounts.forEach((account) => account.classList.remove('active'));
+    const parent = element.closest('.account');
+    parent.classList.add('active');
+    App.showPage( 'transactions', { account_id: currentAccount.dataset.accountId });
   }
 
   /**
@@ -75,7 +97,7 @@ class AccountsWidget {
    * item - объект с данными о счёте
    * */
   getAccountHTML( item ) {
-    return `<li class="account">
+    return `<li class="account" data-account-Id="${item.id}">
       <a href="#">
         <span>${item.name}</span> /
         <span>${item.sum} ₽</span>
@@ -90,6 +112,9 @@ class AccountsWidget {
    * и добавляет его внутрь элемента виджета
    * */
   renderItem( item ) {
+    if (item.success) {
+      this.clear();
+    }
     const accounts = item.data;
     const ulContainer = document.querySelector('.accounts-panel > li');
     let template = accounts.map((account) => this.getAccountHTML(account)).join(' ');

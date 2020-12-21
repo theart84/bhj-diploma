@@ -3,6 +3,7 @@
  * на сервер.
  * */
 const createRequest = async (options = {}) => {
+  console.log(options)
   if (!options.data) {
     return;
   }
@@ -21,9 +22,9 @@ const createRequest = async (options = {}) => {
     });
     response = await response.json();
     options.callback(response);
-    return response;
+    // return response;
   } catch (err) {
-    return Promise.reject(err)
+    return Promise.reject(err);
   }
 }
 

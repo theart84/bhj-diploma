@@ -53,7 +53,7 @@ class App {
     this.modals = {
       register: new Modal( document.querySelector( '#modal-register' )),
       login: new Modal( document.querySelector( '#modal-login' )),
-      createAccount: new Modal( document.querySelector( '#modal-new-account' )),
+      newAccount: new Modal( document.querySelector( '#modal-new-account' )),
       newIncome: new Modal( document.querySelector( '#modal-new-income' )),
       newExpense: new Modal( document.querySelector( '#modal-new-expense' )),
     };
@@ -77,9 +77,9 @@ class App {
     this.forms = {
       login: new LoginForm(document.querySelector('#login-form')),
       register: new RegisterForm(document.querySelector('#register-form')),
-      createAccount: new CreateAccountForm(document.querySelector('#new-account-form')),
-      createIncome: new CreateTransactionForm(document.querySelector('#new-income-form')),
-      createExpense: new CreateTransactionForm(document.querySelector('#new-expense-form'))
+      newAccount: new CreateAccountForm(document.querySelector('#new-account-form')),
+      newIncome: new CreateTransactionForm(document.querySelector('#new-income-form')),
+      newExpense: new CreateTransactionForm(document.querySelector('#new-expense-form'))
     }
   }
 
@@ -198,7 +198,7 @@ class App {
   }
 
   static updateForms() {
-    this.getForm( 'createIncome' ).renderAccountsList();
-    this.getForm( 'createExpense' ).renderAccountsList();
+    this.getForm( 'newIncome' ).renderAccountsList();
+    this.getForm( 'newExpense' ).renderAccountsList();
   }
 }

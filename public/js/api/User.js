@@ -11,6 +11,10 @@ class User {
    * локальном хранилище.
    * */
   static setCurrent(user) {
+    if (!user.success) {
+      alert(user.error);
+      return;
+    }
     const {name, id} = user.user;
     localStorage.setItem(`user`, JSON.stringify({name, id}));
   }

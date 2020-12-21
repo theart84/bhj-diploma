@@ -167,6 +167,100 @@
       "sum": 300000,
       "type": "expense",
       "user_id": "1"
+    },
+    {
+      "id": "1",
+      "type": "INCOME",
+      "name": "Test",
+      "sum": 2000,
+      "created_at": "2020-12-21T20:48:35.147Z"
+    },
+    {
+      "account_id": "3",
+      "id": "2ef7n17okiz19mzm",
+      "type": "EXPENSE",
+      "name": "Test",
+      "sum": 2000,
+      "created_at": "2020-12-21T20:50:09.441Z"
+    },
+    {
+      "id": "2ef7n490kiz1ej9c",
+      "type": "INCOME",
+      "name": "Test",
+      "sum": 2000,
+      "created_at": "2020-12-21T20:53:57.887Z"
+    },
+    {
+      "id": "2ef7nc4kkiz1hgsb",
+      "type": "INCOME",
+      "name": "Test",
+      "sum": 2000,
+      "account_id": "1",
+      "created_at": "2020-12-21T20:56:14.650Z"
+    },
+    {
+      "id": "2ef7ncv0kiz1hofk",
+      "type": "EXPENSE",
+      "name": "Test",
+      "sum": 2000,
+      "account_id": "1",
+      "created_at": "2020-12-21T20:56:24.559Z"
+    },
+    {
+      "id": "2ef7n4vskiz1hxhj",
+      "type": "INCOME",
+      "name": "Test",
+      "sum": 2000,
+      "account_id": "1",
+      "created_at": "2020-12-21T20:56:36.294Z"
+    },
+    {
+      "id": "2ef7n5w4kiz1i2bh",
+      "type": "INCOME",
+      "name": "Test",
+      "sum": 2000,
+      "account_id": "1",
+      "created_at": "2020-12-21T20:56:42.556Z"
+    },
+    {
+      "id": "2ef7n75kkiz1iydv",
+      "type": "INCOME",
+      "name": "te",
+      "sum": 2000,
+      "account_id": "1",
+      "created_at": "2020-12-21T20:57:24.114Z"
+    },
+    {
+      "id": "2ef7n7l4kiz1z68h",
+      "type": "INCOME",
+      "name": "Test",
+      "sum": 2000,
+      "account_id": "1",
+      "created_at": "2020-12-21T21:10:00.784Z"
+    },
+    {
+      "id": "2ef7n4m0kiz1zd3l",
+      "type": "INCOME",
+      "name": "Test",
+      "sum": 2000,
+      "account_id": "2",
+      "created_at": "2020-12-21T21:10:09.680Z"
+    },
+    {
+      "id": "2ef7nc7gkiz203lp",
+      "type": "INCOME",
+      "name": "Test",
+      "sum": 2000,
+      "account_id": "1",
+      "created_at": "2020-12-21T21:10:44.028Z"
+    },
+    {
+      "id": "2ef7n65okiz22a9v",
+      "type": "EXPENSE",
+      "name": "Test",
+      "sum": 2000,
+      "account_id": "2",
+      "created_at": "2020-12-21T21:12:25.986Z"
     }
   ]
 }
