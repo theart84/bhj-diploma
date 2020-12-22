@@ -11,6 +11,7 @@ class LoginForm extends AsyncForm {
    * закрывает окно, в котором находится форма
    * */
   async onSubmit( options, type ) {
+    console.log(options)
     await User.login(options, User.setCurrent);
     const currentForm = App.getForm(type);
     const currentModal = App.getModal(type);

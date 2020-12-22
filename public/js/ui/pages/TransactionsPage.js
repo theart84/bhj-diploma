@@ -22,7 +22,11 @@ class TransactionsPage {
    * Вызывает метод render для отрисовки страницы
    * */
   update() {
-
+    if (this.lastOptions) {
+      this.render(this.lastOptions);
+      return ;
+    }
+    this.render();
   }
 
   /**
@@ -32,7 +36,18 @@ class TransactionsPage {
    * TransactionsPage.removeAccount соответственно
    * */
   registerEvents() {
-
+    const contentContainer = document.querySelector('.content');
+    const removeAccountButton = document.querySelector('.remove-account');
+    contentContainer.addEventListener('click', (e) => {
+      const currentTarget = e.target;
+      if (currentTarget.classList.contains('transaction__remove')) {
+        const transactionID = currentTarget.dataset.id;
+        this.removeTransaction(transactionID);
+      }
+    });
+    removeAccountButton.addEventListener('click', () => {
+      this.removeAccount()
+    })
   }
 
   /**
@@ -44,7 +59,17 @@ class TransactionsPage {
    * для обновления приложения
    * */
   removeAccount() {
-
+    if (!this.lastOptions) {
+      return;
+    }
+    const isConfirm = confirm('Вы действительно хотите удалить счет?');
+    if (!isConfirm) {
+      return;
+    }
+    const { account_id } = this.lastOptions
+    Account.remove(account_id, User.current(), App.update.bind(App));
+    this.lastOptions = null;
+    this.clear()
   }
 
   /**
@@ -53,7 +78,13 @@ class TransactionsPage {
    * По удалению транзакции вызовите метод App.update()
    * */
   removeTransaction(id) {
-
+    const currentTransactionElement = document.querySelector(`button[data-id="${id}"]`).closest('.transaction');
+    const titleTransaction = currentTransactionElement.querySelector('.transaction__title').innerText;
+    const isConfirm = confirm(`Вы действительно хотите удалить транзакцию: ${titleTransaction}`);
+    if (isConfirm) {
+      currentTransactionElement.remove();
+      Transaction.remove(id, User.current(), App.update.bind(App));
+    }
   }
 
   /**
@@ -62,9 +93,13 @@ class TransactionsPage {
    * Получает список Transaction.list и полученные данные передаёт
    * в TransactionsPage.renderTransactions()
    * */
-  async render(options) {
-    await Account.get(options.account_id, User.current(), this.renderTitle.bind(this));
-    await Transaction.list(options, this.renderTransactions.bind(this));
+  render(options) {
+    if (!options) {
+      return;
+    }
+    this.lastOptions = options;
+    Account.get(options.account_id, User.current(), this.renderTitle.bind(this));
+    Transaction.list(options, this.renderTransactions.bind(this));
   }
 
   /**
@@ -73,18 +108,14 @@ class TransactionsPage {
    * Устанавливает заголовок: «Название счёта»
    * */
   clear() {
-    this.renderTitle('Название счета');
-    this.renderTransactions([]);
+    this.renderTitle({data: { name: 'Название счета' } });
+    this.renderTransactions({data: []});
   }
 
   /**
    * Устанавливает заголовок в элемент .content-title
    * */
   renderTitle(data) {
-    if (!data.success) {
-      console.log('Что-то пошло не так...');
-      return;
-    }
     const titleElement = document.querySelector('.content-title');
     titleElement.textContent = data.data.name;
   }

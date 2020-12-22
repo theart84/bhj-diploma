@@ -25,7 +25,7 @@ class Entity {
    * что наследуется от Entity)
    * */
   static async create(data, callback = f => f) {
-    const { id } = User.current();
+    const {id} = User.current();
     const newData = {
       ...data,
       user_id: id,
@@ -63,7 +63,7 @@ class Entity {
       _method: 'DELETE',
     };
     return await createRequest({
-      newData,
+      data: newData,
       url: this.url,
       method: 'POST',
       callback: callback,
