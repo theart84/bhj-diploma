@@ -10,12 +10,12 @@ class RegisterForm extends AsyncForm {
    * состояние App.setState( 'user-logged' )
    * и закрывает окно, в котором находится форма
    * */
-  async onSubmit(options, type) {
-    await User.register(options, User.setCurrent);
-    const currentForm = App.getForm(type);
-    const currentModal = App.getModal(type);
-    currentForm.element.reset();
-    App.setState('user-logged');
-    currentModal.close();
+  async onSubmit(options) {
+    const response = await User.register(options, User.setCurrent);
+    this.element.reset();
+    App.modals.register.close()
+    response.success
+        ? App.setState('user-logged')
+        : App.setState('init');
   }
 }

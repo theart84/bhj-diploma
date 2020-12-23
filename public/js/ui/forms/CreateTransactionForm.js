@@ -37,14 +37,8 @@ class CreateTransactionForm extends AsyncForm {
    * */
   async onSubmit( options ) {
     const typeForm = this.element.closest('.modal').dataset.modalId;
-    const account_id = this.element.querySelector('select').value;
-    await Transaction.create({ ...options, account_id }, App.update.bind(App));
-    const currentForm = App.getForm(typeForm);
-    const currentModal = App.getModal(typeForm);
-    currentForm.element.reset();
-    currentModal.close();
-    // await App.getPage('transactions').update();
-    // document.querySelector(`li[data-account-id="${account_id}"]`).classList.add('active');
-
+    await Transaction.create(options, App.update.bind(App));
+    this.element.reset()
+    App.modals[typeForm].close();
   }
 }

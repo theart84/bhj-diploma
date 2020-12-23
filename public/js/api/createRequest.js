@@ -8,12 +8,10 @@ const createRequest = async (options = {}) => {
   }
   const formData = new FormData();
   let requestURL = options.url;
-  if (options.method === 'GET') {
-    requestURL = `${options.url}${encodeURL(options.data)}`
-  }
-  if (options.method === 'POST') {
-    Object.entries(options.data).forEach(([key, value]) => formData.append(`${key}`, `${value}`));
-  }
+  options.method === 'GET'
+      ? requestURL = `${options.url}${encodeURL(options.data)}`
+      : Object.entries(options.data).forEach(([key, value]) => formData.append(`${key}`, `${value}`));
+
   try {
     let response = await fetch(requestURL, {
       method: options.method,

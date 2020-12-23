@@ -12,9 +12,7 @@ class CreateAccountForm extends AsyncForm {
    * */
   async onSubmit(options) {
     await Account.create(options, App.update.bind(App));
-    const currentForm = App.getForm('newAccount');
-    const currentModal = App.getModal('newAccount');
-    currentForm.element.reset();
-    currentModal.close();
+    this.element.reset()
+    App.modals.newAccount.close()
   }
 }

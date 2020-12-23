@@ -12,7 +12,7 @@ class User {
    * */
   static setCurrent(user) {
     if (!user.success) {
-      alert(user.error);
+      alert(user.error.email || user.error);
       return;
     }
     const {name, id} = user.user;
@@ -45,7 +45,7 @@ class User {
    * авторизованном пользователе.
    * */
   static async fetch(data, callback = f => f) {
-    return await createRequest({
+    await createRequest({
       data,
       url: User.url + '/current',
       method: 'GET',
@@ -88,7 +88,7 @@ class User {
    * выхода необходимо вызвать метод User.unsetCurrent
    * */
   static async logout(data, callback = f => f) {
-    return await createRequest({
+    await createRequest({
       data,
       url: User.url + '/logout',
       method: 'POST',

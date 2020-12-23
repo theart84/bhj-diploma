@@ -39,8 +39,10 @@ class AsyncForm {
    * }
    * */
   getData() {
-    const inputs = [...this.element.querySelectorAll('input')];
-    return inputs.reduce((acc, prev) => {
+    return Object.values(this.element).reduce((acc, prev) => {
+      if(!prev.value) {
+        return acc;
+      }
       acc[prev.name] = prev.value;
       return acc;
     }, {});
@@ -57,6 +59,6 @@ class AsyncForm {
   submit() {
     const typeForm = this.element.closest('.modal').dataset.modalId;
     const data = App.getForm(typeForm).getData();
-    this.onSubmit(data, typeForm)
+    this.onSubmit(data);
   }
 }

@@ -11,7 +11,7 @@ class Entity {
    * (в зависимости от того, что наследуется от Entity)
    * */
   static async list(data, callback = f => f) {
-    return await createRequest({
+    await createRequest({
       data,
       url: this.url,
       method: 'GET',
@@ -31,7 +31,7 @@ class Entity {
       user_id: id,
       _method: 'PUT',
     };
-    return await createRequest({
+    await createRequest({
       data: newData,
       url: this.url,
       method: 'POST',
@@ -44,7 +44,7 @@ class Entity {
    * (в зависимости от того, что наследуется от Entity)
    * */
   static async get(id = '', data, callback = f => f) {
-    return await createRequest({
+    await createRequest({
       data,
       url: `${this.url}/${id}`,
       method: 'GET',
@@ -62,7 +62,7 @@ class Entity {
       id,
       _method: 'DELETE',
     };
-    return await createRequest({
+    await createRequest({
       data: newData,
       url: this.url,
       method: 'POST',
