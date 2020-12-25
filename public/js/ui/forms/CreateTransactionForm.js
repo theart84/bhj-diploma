@@ -8,7 +8,7 @@ class CreateTransactionForm extends AsyncForm {
    * Вызывает родительский конструктор и
    * метод renderAccountsList
    * */
-  constructor( element ) {
+  constructor(element) {
     super(element);
     this.element = element;
     this.renderAccountsList();
@@ -19,14 +19,13 @@ class CreateTransactionForm extends AsyncForm {
    * Обновляет в форме всплывающего окна выпадающий список
    * */
   renderAccountsList() {
-  Account.list(User.current(), (data) => {
-    const selectElements = [...document.querySelectorAll('select')];
-    selectElements.forEach((select) => {
-      const optionElement = [...select.querySelectorAll('option')];
-      optionElement.forEach((option) => option.remove());
-      select.insertAdjacentHTML('afterbegin', data.data.map((item) => `<option value="${item.id}">${item.name}</option>`).join(' '));
-    });
-  })
+    Account.list(User.current(), (data) => {
+      const selectElement = this.element.querySelector('select');
+      // const optionElement = [...selectElement.querySelectorAll('option')];
+      selectElement.innerHTML = ''
+      // optionElement.forEach((option) => option.remove());
+      selectElement.insertAdjacentHTML('afterbegin', data.data.map((item) => `<option value="${item.id}">${item.name}</option>`).join(' '));
+    })
   }
 
   /**
@@ -35,7 +34,7 @@ class CreateTransactionForm extends AsyncForm {
    * вызывает App.update(), сбрасывает форму и закрывает окно,
    * в котором находится форма
    * */
-  async onSubmit( options ) {
+  async onSubmit(options) {
     const typeForm = this.element.closest('.modal').dataset.modalId;
     await Transaction.create(options, App.update.bind(App));
     this.element.reset()

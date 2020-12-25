@@ -36,16 +36,14 @@ class Sidebar {
     const sideBarMenuElement = document.querySelector('.sidebar-menu');
     sideBarMenuElement.addEventListener('click', (e) => {
       const currentElement = e.target;
-      if (currentElement.textContent === 'Вход') {
-        const modalWindow = App.getModal('login');
-        modalWindow.open();
+      if (currentElement.innerText === 'Вход') {
+        App.getModal('login').open();
       }
-      if (currentElement.textContent === 'Регистрация') {
-        const modalWindow = App.getModal('register');
-        modalWindow.open();
+      if (currentElement.innerText === 'Регистрация') {
+        App.getModal('register').open();
       }
-      if (currentElement.textContent === 'Выйти') {
-        User.logout(User.current(), User.unsetCurrent);
+      if (currentElement.innerText === 'Выйти') {
+        User.logout(User.current(), () => App.setState('init'));
       }
     })
   }

@@ -5,10 +5,15 @@
       "email": "demo@demo",
       "password": "demo",
       "id": "1",
-      "isAuthorized": true
+      "isAuthorized": false
     }
   ],
   "accounts": [
+    {
+      "name": "Банк",
+      "user_id": "1",
+      "id": "1"
+    },
     {
       "name": "Магазин",
       "user_id": "1",
@@ -18,11 +23,6 @@
       "name": "Бизнес",
       "user_id": "1",
       "id": "3"
-    },
-    {
-      "name": "Зарплата",
-      "user_id": "1",
-      "id": "2ef7nd3gkj1imt2k"
     }
   ],
   "transactions": [
@@ -160,102 +160,6 @@
       "sum": 300000,
       "type": "expense",
       "user_id": "1"
-    },
-    {
-      "id": "2ef7nadokj1c5kno",
-      "type": "INCOME",
-      "name": "Test",
-      "sum": 2000,
-      "account_id": "1",
-      "created_at": "2020-12-23T11:30:27.923Z"
-    },
-    {
-      "id": "2ef7n9vwkj1iae9s",
-      "type": "INCOME",
-      "name": "Test",
-      "sum": 2000,
-      "account_id": "1",
-      "created_at": "2020-12-23T14:22:10.624Z"
-    },
-    {
-      "id": "2ef7n5mokj1im0vo",
-      "type": "INCOME",
-      "name": "Test",
-      "sum": 2000,
-      "account_id": "1",
-      "created_at": "2020-12-23T14:31:13.139Z"
-    },
-    {
-      "id": "2ef7nb78kj1im99z",
-      "type": "INCOME",
-      "name": "Test",
-      "sum": 2000,
-      "account_id": "1",
-      "created_at": "2020-12-23T14:31:24.022Z"
-    },
-    {
-      "id": "2ef7n6f4kj1imff2",
-      "type": "INCOME",
-      "name": "Artem",
-      "sum": 100000,
-      "account_id": "1",
-      "created_at": "2020-12-23T14:31:31.981Z"
-    },
-    {
-      "id": "2ef7n8fwkj1imkjh",
-      "type": "EXPENSE",
-      "name": "Test",
-      "sum": 2000,
-      "account_id": "1",
-      "created_at": "2020-12-23T14:31:38.620Z"
-    },
-    {
-      "id": "2ef7naoskj1in2qf",
-      "type": "INCOME",
-      "name": "Artem",
-      "sum": 2000,
-      "account_id": "2",
-      "created_at": "2020-12-23T14:32:02.198Z"
-    },
-    {
-      "id": "2ef7n810kj1io9cq",
-      "type": "INCOME",
-      "name": "Test",
-      "sum": 2000,
-      "account_id": "2",
-      "created_at": "2020-12-23T14:32:57.433Z"
-    },
-    {
-      "id": "2ef7ncy0kj1iu5b0",
-      "type": "INCOME",
-      "name": "Test",
-      "sum": 2000,
-      "account_id": "2",
-      "created_at": "2020-12-23T14:37:32.123Z"
-    },
-    {
-      "id": "2ef7n7b8kj1iuef2",
-      "type": "INCOME",
-      "name": "Зарплата",
-      "sum": 60000,
-      "account_id": "2ef7nd3gkj1imt2k",
-      "created_at": "2020-12-23T14:37:43.933Z"
-    },
-    {
-      "id": "2ef7n9sgkj1iwwnk",
-      "type": "INCOME",
-      "name": "Test",
-      "sum": 2000,
-      "account_id": "2",
-      "created_at": "2020-12-23T14:39:40.879Z"
-    },
-    {
-      "id": "2ef7n6n0kj1ix15j",
-      "type": "EXPENSE",
-      "name": "Test",
-      "sum": 2000,
-      "account_id": "2",
-      "created_at": "2020-12-23T14:39:46.710Z"
     }
   ]
 }

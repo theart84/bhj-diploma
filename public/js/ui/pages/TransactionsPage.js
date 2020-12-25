@@ -140,7 +140,7 @@ class TransactionsPage {
    * */
   getTransactionHTML(item) {
     return `
-    <div class="transaction ${item.type.toLowerCase() === 'income' ? 'transaction_income' : 'transaction_expense'} row">
+    <div class="transaction transaction_${item.type.toLowerCase()} row">
     <div class="col-md-7 transaction__details">
       <div class="transaction__icon">
           <span class="fa fa-money fa-2x"></span>
@@ -168,7 +168,7 @@ class TransactionsPage {
    * используя getTransactionHTML
    * */
   renderTransactions(data) {
-    const transactionContainer = document.querySelector('.content');
+    const transactionContainer = this.element.querySelector('.content');
     transactionContainer.innerHTML = '';
     const template = data.data.map((transaction) => this.getTransactionHTML(transaction)).join(' ');
     transactionContainer.insertAdjacentHTML('afterbegin', template);

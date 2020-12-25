@@ -15,7 +15,7 @@ class Modal {
     if (!element) {
       throw new Error('Элемент должен быть передан!');
     }
-    this.modalWindow = element;
+    this.element = element;
     this.registerEvents()
   }
 
@@ -25,8 +25,10 @@ class Modal {
    * (с помощью метода Modal.onClose)
    * */
   registerEvents() {
-    this.closeElements = [...this.modalWindow.querySelectorAll('button[data-dismiss="modal"]')];
-    this.closeElements.forEach((button) => button.addEventListener('click', this.onClose));
+    this.closeElements = [...this.element.querySelectorAll('button[data-dismiss="modal"]')];
+    this.closeElements.forEach((button) => button.addEventListener('click', (e) => {
+      this.onClose(e)
+    }));
   }
 
   /**
@@ -35,10 +37,8 @@ class Modal {
    * */
   onClose(e) {
     e.preventDefault();
-    const currentTarget = e.target;
-    const parent = currentTarget.closest('.modal');
-    const currentModal = App.getModal(parent.dataset.modalId);
-    currentModal.close();
+    this.close();
+
   }
 
   /**
@@ -53,13 +53,13 @@ class Modal {
    * со значением «block»
    * */
   open() {
-    this.modalWindow.style.display = 'block';
+    this.element.style.display = 'block';
   }
 
   /**
    * Закрывает окно: удаляет CSS-свойство display
    * */
   close() {
-    this.modalWindow.style.display = 'none';
+    this.element.style.display = 'none';
   }
 }

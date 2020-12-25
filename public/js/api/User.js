@@ -11,11 +11,7 @@ class User {
    * локальном хранилище.
    * */
   static setCurrent(user) {
-    if (!user.success) {
-      alert(user.error.email || user.error);
-      return;
-    }
-    const {name, id} = user.user;
+    const {name, id} = user;
     localStorage.setItem(`user`, JSON.stringify({name, id}));
   }
 
@@ -25,7 +21,7 @@ class User {
    * */
   static unsetCurrent() {
     localStorage.removeItem('user');
-    App.setState('init');
+    // App.setState('init');
   }
 
   /**
@@ -33,11 +29,7 @@ class User {
    * из локального хранилища
    * */
   static current() {
-    const currentUser = localStorage.getItem('user');
-    if (!currentUser) {
-      return undefined;
-    }
-    return JSON.parse(currentUser);
+    return JSON.parse(localStorage.getItem('user'));
   }
 
   /**
@@ -49,7 +41,7 @@ class User {
       data,
       url: User.url + '/current',
       method: 'GET',
-      callback: callback,
+      callback,
     });
   }
 
@@ -64,7 +56,16 @@ class User {
       data,
       url: User.url + '/login',
       method: 'POST',
-      callback: callback,
+      callback: (response) => {
+        if (!response.success) {
+          alert(response.error);
+          return;
+        }
+        if(response && response.user) {
+          this.setCurrent(response.user)
+        }
+        callback();
+      }
     });
   }
 
@@ -79,7 +80,16 @@ class User {
       data,
       url: User.url + '/register',
       method: 'POST',
-      callback: callback,
+      callback: (response) => {
+        if (!response.success) {
+          alert(response.error.email || response.error);
+          return;
+        }
+        if(response && response.user) {
+          this.setCurrent(response.user)
+        }
+        callback();
+      }
     });
   }
 
@@ -92,7 +102,12 @@ class User {
       data,
       url: User.url + '/logout',
       method: 'POST',
-      callback: callback,
+      callback: (response) => {
+        if (response) {
+          this.unsetCurrent();
+        }
+        callback();
+      }
     });
   }
 }

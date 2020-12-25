@@ -30,22 +30,18 @@ class AccountsWidget {
    * вызывает AccountsWidget.onSelectAccount()
    * */
   registerEvents() {
-    const newAccountButtonElement = document.querySelector('.create-account');
-    const accounts = document.querySelector('.accounts-panel');
+    const newAccountButtonElement = this.element.querySelector('.create-account');
     newAccountButtonElement.addEventListener('click', (e) => {
         e.stopPropagation();
-        const createNewAccountModalWindow = App.getModal('newAccount');
-        createNewAccountModalWindow.open();
+        App.getModal('newAccount').open();
     });
-    accounts.addEventListener('click', (e) => {
+    this.element.addEventListener('click', (e) => {
       const currentElement = e.target;
       const account = currentElement.closest('.account')
       if (account && account.classList.contains('account')) {
         this.onSelectAccount(currentElement);
       }
-
     });
-
   }
 
   /**
@@ -72,8 +68,7 @@ class AccountsWidget {
    * в боковой колонке
    * */
   clear() {
-    const ulContainer = document.querySelector('.accounts-panel');
-    const accountElements = [...ulContainer.querySelectorAll('.account')];
+    const accountElements = [...this.element.querySelectorAll('.account')];
     accountElements.forEach((element) => element.remove());
   }
 
@@ -123,7 +118,7 @@ class AccountsWidget {
       this.clear();
     }
     const accounts = item.data;
-    const ulContainer = document.querySelector('.accounts-panel > li');
+    const ulContainer = this.element.querySelector('li');
     let template = accounts.map((account) => this.getAccountHTML(account)).join(' ');
     ulContainer.insertAdjacentHTML('afterend', template);
   }

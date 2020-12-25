@@ -15,7 +15,7 @@ class Entity {
       data,
       url: this.url,
       method: 'GET',
-      callback: callback,
+      callback,
     });
   }
 
@@ -35,7 +35,7 @@ class Entity {
       data: newData,
       url: this.url,
       method: 'POST',
-      callback: callback,
+      callback,
     });
   }
 
@@ -48,7 +48,7 @@ class Entity {
       data,
       url: `${this.url}/${id}`,
       method: 'GET',
-      callback: callback,
+      callback,
     });
   }
 
@@ -66,7 +66,7 @@ class Entity {
       data: newData,
       url: this.url,
       method: 'POST',
-      callback: callback,
+      callback,
     });
   }
 }
